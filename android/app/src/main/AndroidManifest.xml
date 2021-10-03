@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.crud_firebase">
+    package="com.rocketseat.crud_firebase">
    <application
         android:label="crud_firebase"
         android:icon="@mipmap/ic_launcher">
