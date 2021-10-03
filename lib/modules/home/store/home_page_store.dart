@@ -1,15 +1,15 @@
-import 'package:crud_firebase/shared/data/data_source/todo_remote_data_source.dart';
-import 'package:crud_firebase/shared/data/todo_data_source_interface.dart';
 import 'package:mobx/mobx.dart';
 
+import 'package:crud_firebase/shared/data/data_source/todo_remote_data_source.dart';
 import 'package:crud_firebase/shared/data/models/todo_item.dart';
+import 'package:crud_firebase/shared/data/todo_data_source_interface.dart';
 
 part 'home_page_store.g.dart';
 
 class HomePageStore = _HomePageStore with _$HomePageStore;
 
 abstract class _HomePageStore with Store {
-  static final ToDoDataSourceInterface _toDoRemoteDS = ToDoLocalDataSource();
+  static final ToDoDataSourceInterface _toDoRemoteDS = ToDoRemoteDataSource();
 
   @observable
   var toDoListStream = _toDoRemoteDS.fetchToDoListStream().asObservable();

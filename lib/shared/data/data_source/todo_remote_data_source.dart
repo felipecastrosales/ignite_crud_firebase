@@ -1,53 +1,41 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:crud_firebase/shared/data/models/todo_item.dart';
 import 'package:crud_firebase/shared/data/todo_data_source_interface.dart';
 
-class ToDoLocalDataSource implements ToDoDataSourceInterface {
-  ToDoLocalDataSource() {
-    streamController.stream.listen((itemList) {
-      _actualItemList = itemList;
-    });
-  }
-
-  final streamController = StreamController<List<ToDoItem>?>.broadcast();
-
-  List<ToDoItem>? _actualItemList;
+class ToDoRemoteDataSource implements ToDoDataSourceInterface {
+  
+  final toDoCollection = FirebaseFirestore.instance.collection('toDos');
 
   @override
-  Stream<List<ToDoItem>?> fetchToDoListStream() => streamController.stream;
+  Stream<List<ToDoItem>?> fetchToDoListStream() => 
+    toDoCollection.snapshots().map<List<ToDoItem>>(
+      (event) => event.docs.map((doc) => ToDoItem(
+        id: doc.id,
+        title: doc.data()['title'],
+        state: doc.data()['isDone'],
+      )).toList(),
+    );
 
   @override
   Future<void> onAddToDoItem(ToDoItem item) async {
-    final itemList = _actualItemList ?? <ToDoItem>[];
-    final newList = [...itemList, item];
-
-    streamController.sink.add(newList);
+    await toDoCollection.add(
+      {
+        'title': item.title,
+        'isDone': item.state,
+      },
+    );
   }
 
   @override
   Future<void> onRemoveToDoItem(String uid) async {
-    final itemList = _actualItemList ?? <ToDoItem>[];
-
-    final removableItem = itemList.singleWhere((item) => item.id == uid);
-
-    final newList =
-        itemList.where((item) => item.id != removableItem.id).toList();
-
-    streamController.sink.add(newList);
+    await toDoCollection.doc(uid).delete();
   }
 
   @override
   Future<void> onToogleToDoItemState(String uid, bool state) async {
-    final itemList = _actualItemList ?? <ToDoItem>[];
-
-    final alterableItem = itemList.singleWhere((item) => item.id == uid);
-
-    final newList = [
-      ...itemList.where((item) => item.id != alterableItem.id).toList(),
-      ToDoItem(id: alterableItem.id, title: alterableItem.title, state: state),
-    ];
-
-    streamController.sink.add(newList);
+    await toDoCollection.doc(uid).update({'isDone': state});
   }
 }
