@@ -11,7 +11,7 @@ void main() {
 }
 
 class FirebaseConfigurationWidget extends StatelessWidget {
-  const FirebaseConfigurationWidget({Key? key}) : super(key: key);
+  const FirebaseConfigurationWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

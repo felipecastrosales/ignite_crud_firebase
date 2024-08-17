@@ -6,9 +6,9 @@ import 'package:crud_firebase/shared/data/todo_data_source_interface.dart';
 
 part 'home_page_store.g.dart';
 
-class HomePageStore = _HomePageStore with _$HomePageStore;
+class HomePageStore = HomePageStoreBase with _$HomePageStore;
 
-abstract class _HomePageStore with Store {
+abstract class HomePageStoreBase with Store {
   static final ToDoDataSourceInterface _toDoRemoteDS = ToDoRemoteDataSource();
 
   @observable

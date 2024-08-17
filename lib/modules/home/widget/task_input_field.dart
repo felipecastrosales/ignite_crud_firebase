@@ -4,10 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TaskInputField extends StatelessWidget {
   const TaskInputField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   final TextEditingController controller;
   final VoidCallback onTap;

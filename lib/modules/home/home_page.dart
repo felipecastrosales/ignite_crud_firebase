@@ -10,10 +10,10 @@ import 'package:crud_firebase/shared/data/models/todo_item.dart';
 import 'package:crud_firebase/shared/widgets/themes/app_text_styles.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -116,11 +116,11 @@ class _HomePageState extends State<HomePage> {
 
 class ToDoItemListView extends StatelessWidget {
   const ToDoItemListView({
-    Key? key,
+    super.key,
     required this.itemList,
     required this.onDeleteItem,
     required this.toogleItemState,
-  }) : super(key: key);
+  });
 
   final ValueChanged<ToDoItem> onDeleteItem;
   final ValueChanged<ToDoItem> toogleItemState;
