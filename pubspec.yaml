@@ -2,30 +2,29 @@ name: crud_firebase
 description: Ignite CRUD - Firebase.
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.1+1
 
 environment:
-  sdk: ">=2.14.0 <3.0.0"
+  sdk: ">=3.4.4 <4.0.0"
 
 dependencies:
-  build_runner: ^2.1.4
-  cloud_firestore: ^2.5.3
-  cupertino_icons: ^1.0.3
-  firebase_core: ^1.7.0
-  firebase_core_web: ^1.1.0
+  cloud_firestore: ^5.2.1
+  cupertino_icons: ^1.0.8
+  firebase_core: ^3.3.0
   flutter:
     sdk: flutter
-  flutter_mobx: ^2.0.2
-  google_fonts: ^2.1.0
-  json_serializable: ^5.0.2
-  mobx: ^2.0.4
-  mobx_codegen: ^2.0.3
-  uuid: ^3.0.4
+  flutter_mobx: ^2.2.1
+  google_fonts: ^6.2.1
+  json_serializable: ^6.8.0
+  mobx: ^2.3.3
+  uuid: ^4.4.2
 
 dev_dependencies:
-  flutter_lints: ^1.0.4
+  build_runner: ^2.4.12
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
+  mobx_codegen: ^2.6.1
 
 flutter:
   uses-material-design: true
